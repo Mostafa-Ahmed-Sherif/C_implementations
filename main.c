@@ -1,86 +1,70 @@
 /*************************************************************
 Author : Mostafa Ahmed Sherif
-Code : Addition of two 2D arrays (matrices)
-Date : 25 / 7 / 2023
+Code : Complex numbers structure implementation and testing
+Date : 3 / 9 / 2024
 *************************************************************/
 
-
 #include <stdio.h>
-
-#define ROWS 3
-#define COLS 3
-
-
-/* Function declaration to input, add and print matrix */
-void matrixInput(int mat[][COLS]);
-void matrixPrint(int mat[][COLS]);
-void matrixAdd(int mat1[][COLS], int mat2[][COLS], int res[][COLS]);
-
+#include "complex.h"
 
 int main()
 {
-    int mat1[ROWS][COLS], mat2[ROWS][COLS], res[ROWS][COLS];
+	COMPLEX arr[13];
+	COMPLEX result;
 
-    printf("\n-------------------------------------------------\n");
+	arr[0] = CreateComplex(2, -6);
+	arr[1] = CreateComplex(0, 8);
+	arr[2] = CreateComplex(12,0);
+	arr[3] = CreateComplex(2, -8);
+	arr[4] = CreateComplex(0, -6);
+	arr[5] = CreateComplex(0, -8);
+	arr[6] = CreateComplex(3, -9);
+	arr[7] = CreateComplex(6, 0);
+	arr[8] = CreateComplex(3, -1);
+	arr[9] = CreateComplex(2, -3);
+	arr[10] = CreateComplex(7, -1);
+	arr[11] = CreateComplex(2, 2);
+	arr[12] = CreateComplex(2, -2);
 
-    // Input elements in first matrix
-    printf("Enter elements in first matrix of size %dx%d: \n", ROWS, COLS);
-    matrixInput(mat1);
+	printf ("\n-----------------------------\n" );
+	printf ("Conjugate of the arr[0]: \n" );
+	result = ConjugateComplex(arr);
+	PrintComplex(&result);
+	
+	printf ("\n-----------------------------\n" );
+	printf ("Conjugate of the arr[1]: \n" );
+	result = ConjugateComplex(arr + 1);
+	PrintComplex(&result);
+	
+	printf ("\n-----------------------------\n" );
+	printf ("Conjugate of the arr[2]: \n" );
+	result = ConjugateComplex(arr + 2);
+	PrintComplex(&result);
+	
+	printf ("\n-----------------------------\n" );
+	printf ("Add two Structures: \n" );
+	result = AddComplex(&arr[3], arr + 4);
+	PrintComplex(&result);
 
-    printf("\n-------------------------------------------------\n");
+	printf ("\n-----------------------------\n" );
+	printf ("Add two Structures: \n" );
+	result = AddComplex(arr+5, arr+6);
+	PrintComplex(&result);
 
-    // Input element in second matrix
-    printf("\nEnter elements in second matrix of size %dx%d: \n", ROWS, COLS);
-    matrixInput(mat2);
+	printf ("\n-----------------------------\n" );
+	printf ("Subtract two Structures: \n" );
+	result = SubtractComplex(arr+7, arr+8);
+	PrintComplex(&result);
 
-    printf("\n-------------------------------------------------\n");
+	printf ("\n-----------------------------\n" );
+	printf ("Multiply two Structures: \n" );
+	result = MultiplyComplex(arr+9, arr+10);
+	PrintComplex(&result);
 
-    matrixAdd(mat1, mat2, res); //Adding mat1 and mat2 and storing into res
-
-    printf("\nSum of first and second matrices: \n");
-    matrixPrint(res);
+	printf ("\n-----------------------------\n" );
+	printf ("Divide two Structures: \n" );
+	result = DivideComplex(arr+11, arr+12);
+	PrintComplex(&result);
 
     return 0;
-}
-
-
-
-void matrixInput(int mat[][COLS])
-{
-	for(int i=0;i<ROWS;i++)
-    {
-        for(int j=0;j<COLS;j++)
-        {
-            printf("Enter array element %d%d: ", i+1, j+1);
-            scanf("%d", &mat[i][j]);
-        }
-    }
-}
-
-
-
-
-void matrixPrint(int mat[][COLS])
-{
-    for(int i=0;i<ROWS;i++)
-    {
-        for(int j=0;j<COLS;j++)
-        {
-            printf("%d\t", mat[i][j]);
-        }
-
-        printf("\n");
-    }
-}
-
-
-void matrixAdd(int mat1[][COLS], int mat2[][COLS], int res[][COLS])
-{
-    for(int i=0;i<ROWS;i++)
-    {
-        for(int j=0;j<COLS;j++)
-        {
-            res[i][j] = mat1[i][j] + mat2[i][j];
-        }
-    }
 }
